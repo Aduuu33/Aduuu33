@@ -1,0 +1,18 @@
+from telegram import Update, WebAppInfo
+from telegram.ext import ApplicationBuilder, CommandHandler
+
+async def start(update: Update, _):
+    await update.message.reply_text(
+        text="Open Crypto App",
+        reply_markup={
+            "inline_keyboard": [[{
+                "text": "Launch App",
+                "web_app": {"url": "YOUR_WEB_APP_URL"}  # e.g., https://your-app.vercel.app
+            }]]
+        }
+    )
+
+# Start the bot
+app = ApplicationBuilder().token("YOUR_BOT_TOKEN").build()
+app.add_handler(CommandHandler("start", start))
+app.run_polling()
